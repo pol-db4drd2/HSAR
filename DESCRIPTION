@@ -20,7 +20,10 @@ LinkingTo:
     RcppArmadillo
 LazyData: true
 Suggests: 
+    knitr,
     Matrix,
     Rcpp,
     RcppArmadillo,
+    rmarkdown,
     sf
+VignetteBuilder: knitr
