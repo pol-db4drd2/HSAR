@@ -1,6 +1,6 @@
 Package: HSAR
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Hierarchical Spatial Autoregressive Model
+Version: 0.6.0
 Authors@R: 
     person("Wenbo", "Lv", , "lyu.geosocial@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0002-6003-3800"))
@@ -9,3 +9,9 @@ License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Imports: 
+    spdep, 
+    spatialreg
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
