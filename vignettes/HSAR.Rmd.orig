@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 ```
 
 An application of HSAR for asking prices in the municipality of Athens
-====================================================================
+======================================================================
 
 An application of `hsar()`, based on rel data, will be illustrated. The design of the weight matrices needed and the random effect design matrix will be explained.
 
