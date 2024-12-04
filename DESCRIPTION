@@ -42,4 +42,3 @@ LinkingTo:
     RcppArmadillo
 VignetteBuilder: knitr
 LazyData: true
-URL: https://spatlyu.github.io/HSAR/
