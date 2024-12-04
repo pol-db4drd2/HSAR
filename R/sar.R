@@ -3,6 +3,10 @@
 #' The `sar()` function implements a standard spatial econometrics model (SAR) or a spatially lagged dependent
 #' variable model using the Markov chain Monte Carlo (McMC) simulation approach.
 #' @keywords spatial econometrics
+#' @references
+#' Anselin, L. (1988). \emph{Spatial Econometrics: Methods and Models}. Dordrecht: Kluwer Academic Publishers.
+#'
+#' LeSage, J. P., and R. K. Pace. (2009). \emph{Introduction to Spatial Econometrics}. Boca Raton, FL: CRC Press/Taylor & Francis
 #'
 #' @param formula A symbolic description of the model to fit. A formula for the covariate part of the model
 #' using the syntax of the `stats::lm()` function fitting standard linear regression models. Neither the
@@ -48,6 +52,7 @@
 #'
 #' # extract the land parcel level spatial weights matrix
 #' library(spdep)
+#' library(Matrix)
 #' nb.25 <- spdep::dnearneigh(land,0,2500)
 #' # to a weights matrix
 #' dist.25 <- spdep::nbdists(nb.25,land)

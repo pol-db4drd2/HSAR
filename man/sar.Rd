@@ -69,6 +69,7 @@ data(land)
 
 # extract the land parcel level spatial weights matrix
 library(spdep)
+library(Matrix)
 nb.25 <- spdep::dnearneigh(land,0,2500)
 # to a weights matrix
 dist.25 <- spdep::nbdists(nb.25,land)
@@ -87,6 +88,11 @@ res <- sar(res.formula,data=landprice,W=W,
            parameters.start=pars)
 summary(res)
 }
+}
+\references{
+Anselin, L. (1988). \emph{Spatial Econometrics: Methods and Models}. Dordrecht: Kluwer Academic Publishers.
+
+LeSage, J. P., and R. K. Pace. (2009). \emph{Introduction to Spatial Econometrics}. Boca Raton, FL: CRC Press/Taylor & Francis
 }
 \keyword{econometrics}
 \keyword{spatial}
