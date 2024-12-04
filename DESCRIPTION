@@ -4,11 +4,13 @@ Version: 0.6.0
 Authors@R: 
     person("Wenbo", "Lv", , "lyu.geosocial@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0002-6003-3800"))
-Description: What the package does (one paragraph).
-License: GPL-3
+Description: A Hierarchical Spatial Autoregressive Model (HSAR), based on a Bayesian Markov Chain Monte Carlo (MCMC) algorithm (Dong and Harris (2014) <doi:10.1111/gean.12049>). The creation of this package was supported by the Economic and Social Research Council (ESRC) through the Applied Quantitative Methods Network: Phase II, grant number ES/K006460/1.
+License: GPL (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Depends: 
+    R (>= 3.5)
 Imports: 
     spdep,
     spatialreg,
@@ -16,3 +18,4 @@ Imports:
 LinkingTo: 
     Rcpp,
     RcppArmadillo
+LazyData: true
