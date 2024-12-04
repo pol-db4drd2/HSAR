@@ -38,7 +38,7 @@ install.packages('HSAR',
 if (!requireNamespace("devtools")) {
     install.packages("devtools")
 }
-devtools::install_github("spatlyu/HSAR",
+devtools::install_github("SpatLyu/HSAR",
                          build_vignettes = TRUE,
                          dep = TRUE)
 ```
