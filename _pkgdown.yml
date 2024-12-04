@@ -14,7 +14,7 @@ navbar:
       text: Vignettes
       menu:
       - text: An application of HSAR for asking prices in the municipality of Athens
-        href: articles/hsar.html
+        href: articles/HSAR.html
 
 reference:
 - title: Model
