@@ -42,6 +42,30 @@
 #' @export
 #'
 #' @examples
+#' data(landprice)
+#' head(landprice)
+#' data(land)
+#'
+#' # extract the land parcel level spatial weights matrix
+#' library(spdep)
+#' nb.25 <- spdep::dnearneigh(land,0,2500)
+#' # to a weights matrix
+#' dist.25 <- spdep::nbdists(nb.25,landSPDF)
+#' dist.25 <- lapply(dist.25,function(x) exp(-0.5 * (x / 2500)^2))
+#' mat.25 <- spdep::nb2mat(nb.25,glist=dist.25,style="W")
+#' W <- as(mat.25,"dgCMatrix")
+#'
+#' ## run the sar() function
+#' res.formula <- lnprice ~ lnarea + lndcbd + dsubway + dpark + dele +
+#'                 popden + crimerate + as.factor(year)
+#' betas= coef(lm(formula=res.formula,data=landprice))
+#' pars=list(rho = 0.5, sigma2e = 2.0, betas = betas)
+#' \dontrun{
+#' res <- sar(res.formula,data=landprice,W=W,
+#'            burnin=500, Nsim=1000, thinning=1,
+#'            parameters.start=pars)
+#' summary(res)
+#' }
 sar <- function(formula, data = NULL, W,
                 burnin = 5000, Nsim = 10000, thinning = 1,
                 parameters.start = NULL) {
