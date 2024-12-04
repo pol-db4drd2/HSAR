@@ -1,0 +1,31 @@
+url: https://spatlyu.github.io/HSAR/
+template:
+  bootstrap: 5
+  math-rendering: mathjax
+  light-switch: true
+
+navbar:
+  structure:
+    right:  [search, github]
+    left: [reference, articles, news]
+  bg: custom
+  components:
+    articles:
+      text: Vignettes
+      menu:
+      - text: An application of HSAR for asking prices in the municipality of Athens
+        href: articles/hsar.html
+
+reference:
+- title: Model
+  contents:
+  - hsar
+  - sar
+
+- title: Data
+  contents:
+  - Beijingdistricts
+  - land
+  - landprice
+  - depmunic
+  - properties
