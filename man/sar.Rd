@@ -94,5 +94,3 @@ Anselin, L. (1988). \emph{Spatial Econometrics: Methods and Models}. Dordrecht: 
 
 LeSage, J. P., and R. K. Pace. (2009). \emph{Introduction to Spatial Econometrics}. Boca Raton, FL: CRC Press/Taylor & Francis
 }
-\keyword{econometrics}
-\keyword{spatial}

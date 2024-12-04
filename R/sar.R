@@ -2,7 +2,6 @@
 #' @description
 #' The `sar()` function implements a standard spatial econometrics model (SAR) or a spatially lagged dependent
 #' variable model using the Markov chain Monte Carlo (McMC) simulation approach.
-#' @keywords spatial econometrics
 #' @references
 #' Anselin, L. (1988). \emph{Spatial Econometrics: Methods and Models}. Dordrecht: Kluwer Academic Publishers.
 #'
