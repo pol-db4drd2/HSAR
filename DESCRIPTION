@@ -4,7 +4,7 @@ Version: 0.6.0
 Authors@R: 
     c(
       person(given = "Guanpeng", family = "Dong",
-             email = "gpdong@vip.henu.edu.cn ", 
+             email = "gpdong@vip.henu.edu.cn", 
              role = c("aut", "cph"),
              comment = c(ORCID = "0000-0003-3420-9622")),
       person(given = "Wenbo", family = "Lv",
