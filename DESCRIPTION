@@ -19,3 +19,7 @@ LinkingTo:
     Rcpp,
     RcppArmadillo
 LazyData: true
+Suggests: 
+    Rcpp,
+    RcppArmadillo,
+    sf

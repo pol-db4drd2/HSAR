@@ -9,12 +9,12 @@ summary.mcmc_hsar <- function(object, ...)
   cat("Type:", ' hsar ', "\n")
 
   cat("\nCoefficients:\n")
-  dfb <- as.data.frame( t(rbind(x$Mbetas,x$SDbetas)) )
+  dfb <- as.data.frame(t(rbind(x$Mbetas,x$SDbetas)))
   names(dfb)<-c("Mean","SD")
   print( dfb )
 
   cat("\n Spatial Coefficients:\n")
-  print( cbind( rho= x$Mrho, lambda=x$Mlambda) )
+  print(cbind( rho= x$Mrho, lambda=x$Mlambda))
 
   cat("\n Diagnostics \n")
   cat("Deviance information criterion (DIC):", x$DIC, "\n")
@@ -23,15 +23,15 @@ summary.mcmc_hsar <- function(object, ...)
   cat("Pseudo R squared:", x$R_Squared, "\n")
 
   cat("\n Impacts:\n")
-  df <- as.data.frame( cbind( t(x$impact_direct), t(x$impact_indirect), t(x$impact_total) ) )
+  df <- as.data.frame(cbind( t(x$impact_direct), t(x$impact_indirect), t(x$impact_total)))
   names(df)<-c("direct","indirect","total")
   row.names(df)<- x$labels
 
-  print( df )
+  print(df)
 
   cat("\n Quantiles:\n")
   v <- c(0.05, 0.25, 0.5, 0.75, 0.95)
-  print( t(sapply( x$cbetas, function(i) quantile(i, v))) )
+  print(t(sapply(x$cbetas,function(i) stats::quantile(i, v))))
 
   invisible(x)
 }
@@ -46,7 +46,7 @@ summary.mcmc_sar <- function(object, ...)
   cat("Type:", ' sar ', "\n")
 
   cat("\nCoefficients:\n")
-  dfb <- as.data.frame( t(rbind(x$Mbetas,x$SDbetas)) )
+  dfb <- as.data.frame(t(rbind(x$Mbetas,x$SDbetas)))
   names(dfb)<-c("Mean","SD")
   print( dfb )
 
@@ -62,7 +62,7 @@ summary.mcmc_sar <- function(object, ...)
   cat("Pseudo R squared:", x$R_Squared, "\n")
 
   cat("\n Impacts:\n")
-  df <- as.data.frame( cbind( t(x$impact_direct), t(x$impact_indirect), t(x$impact_total) ) )
+  df <- as.data.frame(cbind( t(x$impact_direct), t(x$impact_indirect), t(x$impact_total)))
   names(df)<-c("direct","indirect","total")
   row.names(df)<- x$labels
 
@@ -70,7 +70,7 @@ summary.mcmc_sar <- function(object, ...)
 
   cat("\n Quantiles:\n")
   v <- c(0.05, 0.25, 0.5, 0.75, 0.95)
-  print( t(sapply( x$cbetas, function(i) quantile(i, v))) )
+  print(t(sapply(x$cbetas, function(i) stats::quantile(i, v))))
 
   invisible(x)
 }
@@ -102,7 +102,7 @@ summary.mcmc_hsar_rho_0 <- function(object, ...)
 
   cat("\n Quantiles:\n")
   v <- c(0.05, 0.25, 0.5, 0.75, 0.95)
-  print( t(sapply( x$cbetas, function(i) quantile(i, v))) )
+  print( t(sapply( x$cbetas, function(i) stats::quantile(i, v))) )
 
   invisible(x)
 }
@@ -134,7 +134,7 @@ summary.mcmc_hsar_lambda_0 <- function(object, ...)
 
   cat("\n Quantiles:\n")
   v <- c(0.05, 0.25, 0.5, 0.75, 0.95)
-  print( t(sapply( x$cbetas, function(i) quantile(i, v))) )
+  print( t(sapply( x$cbetas, function(i) stats::quantile(i, v))) )
 
   invisible(x)
 }

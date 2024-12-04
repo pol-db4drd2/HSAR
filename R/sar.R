@@ -50,7 +50,7 @@
 #' library(spdep)
 #' nb.25 <- spdep::dnearneigh(land,0,2500)
 #' # to a weights matrix
-#' dist.25 <- spdep::nbdists(nb.25,landSPDF)
+#' dist.25 <- spdep::nbdists(nb.25,land)
 #' dist.25 <- lapply(dist.25,function(x) exp(-0.5 * (x / 2500)^2))
 #' mat.25 <- spdep::nb2mat(nb.25,glist=dist.25,style="W")
 #' W <- as(mat.25,"dgCMatrix")
