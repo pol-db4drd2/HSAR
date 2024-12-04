@@ -11,7 +11,7 @@ Authors@R:
              email = "lyu.geosocial@gmail.com", 
              role = c("aut", "cre"),
              comment = c(ORCID = "0009-0002-6003-3800")),
-      person(given = "Richard", family = "Richard",
+      person(given = "Richard", family = "Harris",
              role = "aut"),
       person(given = "Angelos", family = "Mimis",
              role = "aut")
