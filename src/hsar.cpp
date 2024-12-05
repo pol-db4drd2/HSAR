@@ -86,10 +86,14 @@ List hsar_cpp_arma(arma::mat X, arma::vec y, arma::sp_mat W, arma::sp_mat M,
   mat T0 = 100.0 * eye<mat>(p,p);
 
   //completely non-informative priors
-  int c0(0.01);
-  int d0(0.01);
-  int a0(0.01);
-  int b0(0.01);
+  double c0 = 0.01;
+  double d0 = 0.01;
+  double a0 = 0.01;
+  double b0 = 0.01;
+  // int c0(0.01);
+  // int d0(0.01);
+  // int a0(0.01);
+  // int b0(0.01);
 
   //Store MCMC results
   mat Betas = zeros(Nsim-burnin, p);
@@ -108,8 +112,8 @@ List hsar_cpp_arma(arma::mat X, arma::vec y, arma::sp_mat W, arma::sp_mat M,
   float rho_i(rho_start), rho_ip1(rho_start);
   float lambda_i(lambda_start), lambda_ip1(lambda_start);
 
-  int ce( n/2 + c0 );
-  int au( Utotal/2 + a0 );
+  int ce(n/2 + c0);
+  int au(Utotal/2 + a0);
 
   //Fixed matrix manipulations during the MCMC loops
   mat XTX = trans(X) * X;

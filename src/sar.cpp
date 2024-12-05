@@ -112,8 +112,10 @@ List sar_cpp_arma(arma::mat X, arma::vec y, arma::sp_mat W, arma::mat detval,
   mat T0 = 100.0 * eye<mat>(p,p);
 
   //completely non-informative priors
-  int c0(0.01);
-  int d0(0.01);
+  double c0 = 0.01;
+  double d0 = 0.01;
+  // int c0(0.01);
+  // int d0(0.01);
 
   //Store MCMC results
   mat Betas = zeros(Nsim-burnin, p);

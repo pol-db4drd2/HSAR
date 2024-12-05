@@ -87,10 +87,14 @@ List hsar_cpp_arma_lambda_0(arma::mat X, arma::vec y, arma::sp_mat W,
   mat T0 = 100.0 * eye<mat>(p,p);
 
   //completely non-informative priors
-  int c0(0.01);
-  int d0(0.01);
-  int a0(0.01);
-  int b0(0.01);
+  double c0 = 0.01;
+  double d0 = 0.01;
+  double a0 = 0.01;
+  double b0 = 0.01;
+  // int c0(0.01);
+  // int d0(0.01);
+  // int a0(0.01);
+  // int b0(0.01);
 
   //Store MCMC results
   mat Betas = zeros(Nsim-burnin, p);
