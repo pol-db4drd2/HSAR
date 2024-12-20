@@ -21,19 +21,20 @@ We start by loading the libraries that will be used.
 
 ``` r
 library(sf)
-## Linking to GEOS 3.12.1, GDAL 3.8.4, PROJ 9.3.1; sf_use_s2() is TRUE
 library(spdep)
-## Loading required package: spData
 library(tidyverse)
-## ── Attaching core tidyverse packages ─────────────────────────────────────────── tidyverse 2.0.0 ──
+## ── Attaching core tidyverse packages ─────────────────────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2
-## ── Conflicts ───────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.2     
+## ── Conflicts ───────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ tidyr::expand() masks Matrix::expand()
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
+## ✖ tidyr::pack()   masks Matrix::pack()
+## ✖ tidyr::unpack() masks Matrix::unpack()
 ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 library(HSAR)
 ```
@@ -192,11 +193,11 @@ res.formula <- prpsqm ~ size + age + greensp + population + museums + airbnb
 res <- hsar(res.formula,data=model.data,W=W,M=M,Delta=Delta,
             burnin=500, Nsim=1000)
 ## Warning in spdep::mat2listw(W): style is M (missing); style should be set to a valid value
-## Warning in sn2listw(df, style = style, zero.policy = zero.policy, from_mat2listw = TRUE): style is
-## M (missing); style should be set to a valid value
+## Warning in sn2listw(df, style = style, zero.policy = zero.policy, from_mat2listw = TRUE):
+## style is M (missing); style should be set to a valid value
 ## Warning in spdep::mat2listw(W): style is M (missing); style should be set to a valid value
-## Warning in sn2listw(df, style = style, zero.policy = zero.policy, from_mat2listw = TRUE): style is
-## M (missing); style should be set to a valid value
+## Warning in sn2listw(df, style = style, zero.policy = zero.policy, from_mat2listw = TRUE):
+## style is M (missing); style should be set to a valid value
 summary(res)
 ## 
 ## Call:
@@ -206,43 +207,43 @@ summary(res)
 ## 
 ## Coefficients:
 ##                      Mean           SD
-## (Intercept)  1.880878e+03 9.9085321261
-## size         4.308784e+00 0.4857075117
-## age         -1.992973e+01 1.3218947297
-## greensp      7.638049e-04 0.0006136726
-## population  -9.642519e-03 0.0022135920
-## museums     -4.488692e+01 9.5710324827
-## airbnb       5.575054e-01 0.1645700213
+## (Intercept)  1.880468e+03 9.835447e+00
+## size         4.298802e+00 5.112041e-01
+## age         -1.995687e+01 1.304370e+00
+## greensp      8.404794e-04 8.738884e-04
+## population  -9.940391e-03 2.273935e-03
+## museums     -4.515772e+01 1.008513e+01
+## airbnb       6.022747e-01 2.496115e-01
 ## 
 ##  Spatial Coefficients:
-##           rho  lambda
-## [1,] 0.188356 0.14771
+##           rho   lambda
+## [1,] 0.196536 0.018432
 ## 
 ##  Diagnostics 
-## Deviance information criterion (DIC): 28196.61 
-## Effective number of parameters (pd): -1.524159 
-## Log likelihood: -14099.83 
-## Pseudo R squared: 0.3588787 
+## Deviance information criterion (DIC): 28193.01 
+## Effective number of parameters (pd): -1.66553 
+## Log likelihood: -14098.17 
+## Pseudo R squared: 0.3601049 
 ## 
 ##  Impacts:
 ##                    direct      indirect         total
-## (Intercept)  1.881439e+03  4.358260e+02  2.317264e+03
-## size         4.310068e+00  9.984060e-01  5.308474e+00
-## age         -1.993567e+01 -4.618001e+00 -2.455368e+01
-## greensp      7.640326e-04  1.769844e-04  9.410169e-04
-## population  -9.645393e-03 -2.234308e-03 -1.187970e-02
-## museums     -4.490030e+01 -1.040093e+01 -5.530124e+01
-## airbnb       5.576716e-01  1.291819e-01  6.868535e-01
+## (Intercept)  1.881082e+03  4.592335e+02  2.340316e+03
+## size         4.300207e+00  1.049821e+00  5.350028e+00
+## age         -1.996339e+01 -4.873715e+00 -2.483711e+01
+## greensp      8.407540e-04  2.052555e-04  1.046009e-03
+## population  -9.943639e-03 -2.427567e-03 -1.237121e-02
+## museums     -4.517248e+01 -1.102808e+01 -5.620055e+01
+## airbnb       6.024715e-01  1.470830e-01  7.495545e-01
 ## 
 ##  Quantiles:
 ##                        5%           25%           50%           75%           95%
-## (Intercept)  1.865108e+03  1.873915e+03  1.880482e+03  1.887116e+03  1.899108e+03
-## size         3.474374e+00  3.985585e+00  4.313592e+00  4.660815e+00  5.054106e+00
-## age         -2.199631e+01 -2.079239e+01 -1.997034e+01 -1.906072e+01 -1.767202e+01
-## greensp     -2.965393e-04  3.974262e-04  7.551037e-04  1.132355e-03  1.722759e-03
-## population  -1.320664e-02 -1.116246e-02 -9.764824e-03 -8.101470e-03 -5.738580e-03
-## museums     -6.031927e+01 -5.151993e+01 -4.444317e+01 -3.817029e+01 -3.079498e+01
-## airbnb       2.722792e-01  4.595209e-01  5.553124e-01  6.682065e-01  8.220889e-01
+## (Intercept)  1.864369e+03  1.874059e+03  1.880361e+03  1.887328e+03  1.896080e+03
+## size         3.436255e+00  3.956910e+00  4.291712e+00  4.628642e+00  5.155081e+00
+## age         -2.215863e+01 -2.075471e+01 -1.991798e+01 -1.911688e+01 -1.792525e+01
+## greensp     -3.546526e-04  2.905312e-04  7.376810e-04  1.261277e-03  2.657171e-03
+## population  -1.382163e-02 -1.159143e-02 -9.920309e-03 -8.353503e-03 -6.404121e-03
+## museums     -6.148110e+01 -5.224350e+01 -4.495013e+01 -3.850940e+01 -2.847943e+01
+## airbnb       1.776907e-01  4.578970e-01  6.114716e-01  7.457536e-01  1.010643e+00
 ```
 
 and the two simpler models defined for rho = 0 and lambda=0.
@@ -252,8 +253,8 @@ So, firstly,  assuming rho = 0 (no interaction effects at the lower level) we ge
 ``` r
 res_1 <- hsar(res.formula,data=model.data,W=NULL,M=M,Delta=Delta,burnin=500, Nsim=1000)
 ## Warning in spdep::mat2listw(W): style is M (missing); style should be set to a valid value
-## Warning in sn2listw(df, style = style, zero.policy = zero.policy, from_mat2listw = TRUE): style is
-## M (missing); style should be set to a valid value
+## Warning in sn2listw(df, style = style, zero.policy = zero.policy, from_mat2listw = TRUE):
+## style is M (missing); style should be set to a valid value
 summary(res_1)
 ## 
 ## Call:
@@ -263,33 +264,33 @@ summary(res_1)
 ## 
 ## Coefficients:
 ##                      Mean           SD
-## (Intercept)  1.881134e+03 1.002537e+01
-## size         4.315024e+00 4.218945e-01
-## age         -2.002619e+01 1.287527e+00
-## greensp      7.226078e-04 5.564728e-04
-## population  -7.121008e-03 1.120733e-03
-## museums     -4.585389e+01 1.025743e+01
-## airbnb       6.433655e-01 1.604121e-01
+## (Intercept)  1.880592e+03 1.010450e+01
+## size         4.329009e+00 4.214029e-01
+## age         -2.004845e+01 1.258780e+00
+## greensp      6.812935e-04 6.843458e-04
+## population  -6.877688e-03 1.100394e-03
+## museums     -4.585817e+01 9.479326e+00
+## airbnb       6.288388e-01 2.222552e-01
 ## 
 ##  Spatial Coefficients:
 ##    lambda 
-## -0.026046 
+## -0.130888 
 ## 
 ##  Diagnostics 
-## Deviance information criterion (DIC): 28189.43 
-## Effective number of parameters (pd): -1.792601 
-## Log likelihood: -14096.51 
-## Pseudo R squared: 0.3578193 
+## Deviance information criterion (DIC): 28196.24 
+## Effective number of parameters (pd): -1.988165 
+## Log likelihood: -14100.11 
+## Pseudo R squared: 0.3587056 
 ## 
 ##  Quantiles:
 ##                        5%           25%           50%           75%           95%
-## (Intercept)  1.864436e+03  1.874832e+03  1.881650e+03  1.887990e+03  1.896975e+03
-## size         3.644688e+00  4.041712e+00  4.329345e+00  4.602022e+00  5.023365e+00
-## age         -2.219428e+01 -2.086044e+01 -2.001777e+01 -1.921052e+01 -1.781857e+01
-## greensp     -5.217643e-05  3.655865e-04  6.542170e-04  1.009572e-03  1.786107e-03
-## population  -8.760368e-03 -7.847762e-03 -7.202664e-03 -6.476834e-03 -5.157352e-03
-## museums     -6.156313e+01 -5.381063e+01 -4.567536e+01 -3.870049e+01 -2.860034e+01
-## airbnb       3.738831e-01  5.369197e-01  6.492991e-01  7.430972e-01  9.062610e-01
+## (Intercept)  1.863327e+03  1.874280e+03  1.880446e+03  1.887451e+03  1.897526e+03
+## size         3.648867e+00  4.026734e+00  4.331703e+00  4.647616e+00  5.040309e+00
+## age         -2.217344e+01 -2.090501e+01 -2.002926e+01 -1.916105e+01 -1.800675e+01
+## greensp     -5.464395e-04  3.468840e-04  7.498473e-04  1.081365e-03  1.660609e-03
+## population  -8.718853e-03 -7.542340e-03 -6.897453e-03 -6.200430e-03 -4.988964e-03
+## museums     -6.078241e+01 -5.205170e+01 -4.542701e+01 -3.995038e+01 -3.145765e+01
+## airbnb       2.844778e-01  4.953275e-01  6.164306e-01  7.496283e-01  9.872352e-01
 ```
 
 and secondly, given lambda = 0 (no interaction at the higher level) we get
@@ -298,8 +299,8 @@ and secondly, given lambda = 0 (no interaction at the higher level) we get
 ``` r
 res_2 <- hsar(res.formula,data=model.data,W=W,M=NULL,Delta=Delta,burnin=500, Nsim=1000)
 ## Warning in spdep::mat2listw(W): style is M (missing); style should be set to a valid value
-## Warning in sn2listw(df, style = style, zero.policy = zero.policy, from_mat2listw = TRUE): style is
-## M (missing); style should be set to a valid value
+## Warning in sn2listw(df, style = style, zero.policy = zero.policy, from_mat2listw = TRUE):
+## style is M (missing); style should be set to a valid value
 summary(res_2)
 ## 
 ## Call:
@@ -309,31 +310,31 @@ summary(res_2)
 ## 
 ## Coefficients:
 ##                      Mean           SD
-## (Intercept)  1.881433e+03 9.7787251890
-## size         4.320724e+00 0.5145981502
-## age         -2.006309e+01 1.3671298243
-## greensp      9.191971e-04 0.0006723134
-## population  -9.097623e-03 0.0022338151
-## museums     -4.564746e+01 9.6967267461
-## airbnb       5.445758e-01 0.2287821477
+## (Intercept)  1.880293e+03 9.970170e+00
+## size         4.271588e+00 4.581010e-01
+## age         -1.995568e+01 1.295576e+00
+## greensp      9.672711e-04 6.581401e-04
+## population  -9.434666e-03 2.083913e-03
+## museums     -4.545286e+01 1.035321e+01
+## airbnb       5.415177e-01 1.964108e-01
 ## 
 ##  Spatial Coefficients:
-##      rho 
-## 0.173088 
+##     rho 
+## 0.19122 
 ## 
 ##  Diagnostics 
-## Deviance information criterion (DIC): 28198.6 
-## Effective number of parameters (pd): -1.704043 
-## Log likelihood: -14101 
-## Pseudo R squared: 0.3623617 
+## Deviance information criterion (DIC): 28196.99 
+## Effective number of parameters (pd): -1.752399 
+## Log likelihood: -14100.25 
+## Pseudo R squared: 0.3597633 
 ## 
 ##  Quantiles:
 ##                        5%           25%           50%           75%           95%
-## (Intercept)  1.865152e+03  1.875127e+03  1.881216e+03  1.887290e+03  1.897579e+03
-## size         3.458822e+00  3.993053e+00  4.325490e+00  4.657485e+00  5.126591e+00
-## age         -2.231385e+01 -2.093929e+01 -2.011275e+01 -1.917424e+01 -1.780022e+01
-## greensp     -1.478657e-04  4.673335e-04  9.304327e-04  1.372135e-03  1.963982e-03
-## population  -1.280245e-02 -1.064503e-02 -9.044582e-03 -7.595252e-03 -5.335030e-03
-## museums     -6.121924e+01 -5.253706e+01 -4.566362e+01 -3.913182e+01 -2.949665e+01
-## airbnb       1.861284e-01  3.930978e-01  5.466702e-01  6.996989e-01  9.133508e-01
+## (Intercept)  1.864332e+03  1.873364e+03  1.880298e+03  1.886796e+03  1.896416e+03
+## size         3.550689e+00  3.944261e+00  4.254099e+00  4.559823e+00  5.073155e+00
+## age         -2.192657e+01 -2.079846e+01 -1.995871e+01 -1.909676e+01 -1.780104e+01
+## greensp      3.886899e-05  5.256176e-04  8.835621e-04  1.378462e-03  2.197482e-03
+## population  -1.282486e-02 -1.074985e-02 -9.589800e-03 -8.107401e-03 -6.107883e-03
+## museums     -6.271483e+01 -5.293104e+01 -4.448211e+01 -3.801137e+01 -2.948482e+01
+## airbnb       2.208243e-01  4.100049e-01  5.411334e-01  6.705060e-01  8.635070e-01
 ```
