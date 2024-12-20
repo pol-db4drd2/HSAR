@@ -137,17 +137,13 @@ betas= coef(lm(formula=res.formula,data=landprice))
 pars=list( rho = 0.5,lambda = 0.5, sigma2e = 2.0, sigma2u = 2.0, betas = betas )
 
 \donttest{
-  res <- hsar(res.formula,data=model.data,W=W,M=M,Delta=Delta,
+  res <- hsar(res.formula, data=landprice, W=W, M=M, Delta=Delta,
               burnin=500, Nsim=1000, thinning = 1, parameters.start=pars)
   summary(res)
 
   # visualise the district level random effect
-  library(classInt)
-  library(RColorBrewer)
-  x <- as.numeric(res$Mus)
-  breaks <- classIntervals(x,4,"fisher")$brks
-  groups <- cut(x,breaks,include.lowest=TRUE,labels=FALSE)
-  palette <- brewer.pal(4, "Blues")
+  groups <- sdsfun::discretize_vector(res$Mus,n = 4,method = "natural")
+  palette <- RColorBrewer::brewer.pal(4, "Blues")
   plot(Beijingdistricts,col=palette[groups],border="grey")
 }
 }
