@@ -118,7 +118,7 @@
 #' betas= coef(lm(formula=res.formula,data=landprice))
 #' pars=list( rho = 0.5,lambda = 0.5, sigma2e = 2.0, sigma2u = 2.0, betas = betas )
 #'
-#' \dontrun{
+#' \donttest{
 #'   res <- hsar(res.formula,data=model.data,W=W,M=M,Delta=Delta,
 #'               burnin=500, Nsim=1000, thinning = 1, parameters.start=pars)
 #'   summary(res)

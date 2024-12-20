@@ -82,7 +82,7 @@ res.formula <- lnprice ~ lnarea + lndcbd + dsubway + dpark + dele +
                 popden + crimerate + as.factor(year)
 betas= coef(lm(formula=res.formula,data=landprice))
 pars=list(rho = 0.5, sigma2e = 2.0, betas = betas)
-\dontrun{
+\donttest{
 res <- sar(res.formula,data=landprice,W=W,
            burnin=500, Nsim=1000, thinning=1,
            parameters.start=pars)
