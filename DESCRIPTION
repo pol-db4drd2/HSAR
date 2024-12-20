@@ -32,9 +32,11 @@ Imports:
 Suggests: 
     knitr,
     Matrix,
+    RColorBrewer,
     Rcpp,
     RcppArmadillo,
     rmarkdown,
+    sdsfun,
     sf,
     tidyverse
 LinkingTo: 
