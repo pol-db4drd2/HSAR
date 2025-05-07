@@ -40,3 +40,5 @@ testspace <- dplyr::mutate(
 # del <- model.matrix(~ factor(I) - 1, testspace)
 
 usethis::use_data(testspace, overwrite = TRUE)
+usethis::use_data(WL,        overwrite = TRUE)
+usethis::use_data(WU,        overwrite = TRUE)
