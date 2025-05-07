@@ -2,6 +2,8 @@
 # This is a toy data set to use for unit tests in HSAR
 # Now, thinking through how to write and use unit tests in HSAR is another matter
 
+set.seed(1234567890)
+
 L  <-  0.25
 R  <- -0.3
 
