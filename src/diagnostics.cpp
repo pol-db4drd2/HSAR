@@ -17,6 +17,31 @@ void diagnostic_impacts(const mat& betas, double rho, const sp_mat& W,
   indirect = total - direct;
 }
 
+// 2025-05-22: as a non-C++ programmer I don't usually think about scope this way -GA
+void diagnostic_impacts_Durbin(const mat& betas, const mat& thetas, double rho, const sp_mat& W,
+                               mat& direct, mat& indirect, mat& total) {
+
+  int n = W.n_rows;
+
+  sp_mat I_sp = speye<sp_mat>(n,n);
+
+  sp_mat SW = I_sp+rho*W+pow(rho,2)*(W*W)+pow(rho,3)*(W*W*W)+pow(rho,4)*(W*W*W*W)+pow(rho,5)*(W*W*W*W*W);
+
+  vec d( SW.diag() );
+
+  direct = sum(d)/n * betas;
+  total = accu(SW)/n * betas;
+  // indirect = total - direct;
+
+  SW = W * SW;
+
+  vec t( SW.diag() );
+
+  direct += sum(t)/n * thetas;
+  total += accu(SW)/n * thetas;
+  indirect = total - direct;
+}
+
 
 // Estimate Deviance Information Criterion (DIC)
 void diagnostic_dic_pd(vec log_likelihood_post_samples,double log_likelihood_mean_theta, double& DIC, double& pd) {

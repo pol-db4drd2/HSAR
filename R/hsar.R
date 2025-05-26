@@ -34,6 +34,7 @@
 #' less than 1, M is also row-normalised before running the HSAR model. As with W, M should also be a column-oriented numeric sparse matrices.
 #' @param Delta The N by J random effect design matrix that links the J by 1 higher-level random effect vector back to the N by 1 response variable under investigation. It is simply how lower-level units are grouped into each high-level units with columns of the matrix being each higher-level units. As with W and M, \eqn{\delta} should also be a
 #' column-oriented numeric sparse matrices.
+#' @param Durbin `logical`. Estimate Durbin model (i.e. include spatial lags of `X` as predictors)? Default `FALSE`.
 #' @param burnin The number of MCMC samples to discard as the burnin period.
 #' @param Nsim The total number of MCMC samples to generate.
 #' @param thinning MCMC thinning factor.
@@ -133,7 +134,7 @@
 #'   palette <- RColorBrewer::brewer.pal(4, "Blues")
 #'   plot(Beijingdistricts,col=palette[groups],border="grey")
 #' }
-hsar <- function(formula, data = NULL, W=NULL, M=NULL, Delta,
+hsar <- function(formula, data = NULL, W=NULL, M=NULL, Delta, Durbin = FALSE,
                  burnin=5000, Nsim=10000, thinning=1, parameters.start = NULL) {
 
     ## check input data and formula
@@ -152,7 +153,21 @@ hsar <- function(formula, data = NULL, W=NULL, M=NULL, Delta,
     if( !is.null(W) ) check_matrix_dimensions(W,n,'Wrong dimensions for matrix W' )
     if( !is.null(M) ) check_matrix_dimensions(M,p,'Wrong dimensions for matrix M' )
 
-    Unum <- apply(Delta,2,sum)
+    if(length(Durbin) != 1)           {stop("`Durbin` must be either TRUE or FALSE")}
+    if(!(Durbin %in% c(TRUE, FALSE))) {stop("`Durbin` must be either TRUE or FALSE")}
+
+    Xlabel <- colnames(X)
+    Xnames <- setdiff(Xlabel, "(Intercept)")
+
+    # 2025-05-20: attach lag X if `Durbin == TRUE`
+    # TODO 2025-05-20: is it OK to treat factor dummies the same as any other column?
+    lag_X <- if(Durbin) {W %*% X[, Xnames]}
+    lag_X <- if(Durbin) {as.matrix(lag_X)}
+    lag_X <- if(Durbin) {`colnames<-`(lag_X, paste0("lag_", Xnames))}
+
+    X <- if(Durbin) {cbind(X, lag_X)} else {X}
+
+    Unum <- apply(Delta,2,sum) # TODO 2025-05-20: eventually allow for multiple membership somehow
 
     #start parameters
     if (! is.null(parameters.start)){
@@ -186,7 +201,7 @@ hsar <- function(formula, data = NULL, W=NULL, M=NULL, Delta,
     # Special case where lamda =0 ; independent regional effect
     if ( is.null(M)){
       detval <- lndet_imrw(W)
-      result <- hsar_cpp_arma_lambda_0(X, y, W, Delta, detval, Unum, burnin, Nsim, thinning, rho, sigma2e, sigma2u, betas)
+      result <- hsar_cpp_arma_lambda_0(X, y, W, Delta, detval, Unum, burnin, Nsim, thinning, rho, sigma2e, sigma2u, betas, Durbin)
         #.Call("HSAR_hsar_cpp_arma_lambda_0", PACKAGE = 'HSAR', X, y, W, Delta, detval, Unum,
          #             burnin, Nsim, thinning, rho, sigma2e, sigma2u, betas)
       class(result) <- "mcmc_hsar_lambda_0"
@@ -195,7 +210,7 @@ hsar <- function(formula, data = NULL, W=NULL, M=NULL, Delta,
     if ( (!is.null(M)) & (!is.null(W))){
       detval <- lndet_imrw(W)
       detvalM <- lndet_imrw(M)
-      result <- hsar_cpp_arma(X, y, W, M, Delta, detval, detvalM, Unum, burnin, Nsim, thinning, rho, lambda, sigma2e, sigma2u, betas)
+      result <- hsar_cpp_arma(X, y, W, M, Delta, detval, detvalM, Unum, burnin, Nsim, thinning, rho, lambda, sigma2e, sigma2u, betas, Durbin)
         #.Call("HSAR_hsar_cpp_arma", PACKAGE = 'HSAR', X, y, W, M, Delta, detval, detvalM, Unum,
          #             burnin, Nsim, thinning, rho, lambda, sigma2e, sigma2u, betas)
       class(result) <- "mcmc_hsar"
@@ -205,9 +220,16 @@ hsar <- function(formula, data = NULL, W=NULL, M=NULL, Delta,
     result$Mbetas<-put_labels_to_coefficients(result$Mbetas, colnames(X))
     result$SDbetas<-put_labels_to_coefficients(result$SDbetas, colnames(X))
 
-    result$labels <- colnames(X)
+    if(!is.null(W)) { # 2025-05-27: name the impacts here and avoid complications arising from `Durbin == TRUE` downstream
+      result$impact_direct   <- put_labels_to_coefficients(result$impact_direct, Xnames)
+      result$impact_indirect <- put_labels_to_coefficients(result$impact_direct, Xnames)
+      result$impact_total    <- put_labels_to_coefficients(result$impact_direct, Xnames)
+    }
+
+    result$labels <- Xlabel
     result$call <- match.call()
     result$formula <- formula
+    result$Durbin <- Durbin
 
     return(result)
 }
