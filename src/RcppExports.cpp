@@ -85,6 +85,33 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// impact_cpp_arma
+List impact_cpp_arma(arma::mat betas, arma::vec rhos, arma::sp_mat W);
+RcppExport SEXP _HSAR_impact_cpp_arma(SEXP betasSEXP, SEXP rhosSEXP, SEXP WSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type betas(betasSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type rhos(rhosSEXP);
+    Rcpp::traits::input_parameter< arma::sp_mat >::type W(WSEXP);
+    rcpp_result_gen = Rcpp::wrap(impact_cpp_arma(betas, rhos, W));
+    return rcpp_result_gen;
+END_RCPP
+}
+// impact_Durbin_cpp_arma
+List impact_Durbin_cpp_arma(arma::mat betas, arma::mat thetas, arma::vec rhos, arma::sp_mat W);
+RcppExport SEXP _HSAR_impact_Durbin_cpp_arma(SEXP betasSEXP, SEXP thetasSEXP, SEXP rhosSEXP, SEXP WSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type betas(betasSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type thetas(thetasSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type rhos(rhosSEXP);
+    Rcpp::traits::input_parameter< arma::sp_mat >::type W(WSEXP);
+    rcpp_result_gen = Rcpp::wrap(impact_Durbin_cpp_arma(betas, thetas, rhos, W));
+    return rcpp_result_gen;
+END_RCPP
+}
 // sar_cpp_arma
 List sar_cpp_arma(arma::mat X, arma::vec y, arma::sp_mat W, arma::mat detval, int burnin, int Nsim, int thinning, float rho_start, float sigma2e_start, arma::vec betas_start, bool Durbin);
 RcppExport SEXP _HSAR_sar_cpp_arma(SEXP XSEXP, SEXP ySEXP, SEXP WSEXP, SEXP detvalSEXP, SEXP burninSEXP, SEXP NsimSEXP, SEXP thinningSEXP, SEXP rho_startSEXP, SEXP sigma2e_startSEXP, SEXP betas_startSEXP, SEXP DurbinSEXP) {
@@ -111,6 +138,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_HSAR_hsar_cpp_arma", (DL_FUNC) &_HSAR_hsar_cpp_arma, 17},
     {"_HSAR_hsar_cpp_arma_lambda_0", (DL_FUNC) &_HSAR_hsar_cpp_arma_lambda_0, 14},
     {"_HSAR_hsar_cpp_arma_rho_0", (DL_FUNC) &_HSAR_hsar_cpp_arma_rho_0, 13},
+    {"_HSAR_impact_cpp_arma", (DL_FUNC) &_HSAR_impact_cpp_arma, 3},
+    {"_HSAR_impact_Durbin_cpp_arma", (DL_FUNC) &_HSAR_impact_Durbin_cpp_arma, 4},
     {"_HSAR_sar_cpp_arma", (DL_FUNC) &_HSAR_sar_cpp_arma, 11},
     {NULL, NULL, 0}
 };

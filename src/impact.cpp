@@ -11,6 +11,9 @@ using namespace arma;
 using namespace std;
 
 // 2025-05-27: try as best we can to define funcs for taking impact estimates sample by sample
+
+// [[Rcpp::export]]
+
 List impact_cpp_arma(arma::mat betas, arma::vec rhos, arma::sp_mat W) {
   mat direct, indirect, total;
   mat directs, indirects, totals;
@@ -27,6 +30,8 @@ List impact_cpp_arma(arma::mat betas, arma::vec rhos, arma::sp_mat W) {
                       Named("indirect") = indirects,
                       Named("total") = totals);
 }
+
+// [[Rcpp::export]]
 
 List impact_Durbin_cpp_arma(arma::mat betas, arma::mat thetas, arma::vec rhos, arma::sp_mat W) {
   mat direct, indirect, total;

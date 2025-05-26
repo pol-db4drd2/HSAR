@@ -13,6 +13,14 @@ hsar_cpp_arma_rho_0 <- function(X, y, M, Z, detvalM, Unum, burnin, Nsim, thinnin
     .Call(`_HSAR_hsar_cpp_arma_rho_0`, X, y, M, Z, detvalM, Unum, burnin, Nsim, thinning, lambda_start, sigma2e_start, sigma2u_start, betas_start)
 }
 
+impact_cpp_arma <- function(betas, rhos, W) {
+    .Call(`_HSAR_impact_cpp_arma`, betas, rhos, W)
+}
+
+impact_Durbin_cpp_arma <- function(betas, thetas, rhos, W) {
+    .Call(`_HSAR_impact_Durbin_cpp_arma`, betas, thetas, rhos, W)
+}
+
 sar_cpp_arma <- function(X, y, W, detval, burnin, Nsim, thinning, rho_start, sigma2e_start, betas_start, Durbin) {
     .Call(`_HSAR_sar_cpp_arma`, X, y, W, detval, burnin, Nsim, thinning, rho_start, sigma2e_start, betas_start, Durbin)
 }

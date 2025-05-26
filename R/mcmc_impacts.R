@@ -4,13 +4,14 @@
 #' @export
 mcmc_impacts <- function(object) {
   betas <- object$cbetas
+  betas <- as.matrix(betas)
   betas <- betas[, setdiff(colnames(betas), "(Intercept)")]
 
   if(object$Durbin) {
     thetas <- betas[,  grepl("^lag_", colnames(betas))]
     betas  <- betas[, !grepl("^lag_", colnames(betas))]
 
-    result <- impact_durbin_cpp_arma(betas, thetas, object$crho, object$W)
+    result <- impact_Durbin_cpp_arma(betas, thetas, object$crho, object$W)
   } else {
     result <- impact_cpp_arma(betas, object$crho, object$W)
   }
