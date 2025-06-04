@@ -1,6 +1,8 @@
 #include "diagnostics.h"
 
 // Calculate the summary measures of the impacts (using aproximation for inv(SW) )
+// TODO 2025-05-27: pass in SW as an argument to make mcmc_impacts faster, I guess
+// TODO 2025-05-27: consider increasing number of powers of rho * W for accuracy
 void diagnostic_impacts(const mat& betas, double rho, const sp_mat& W,
                         mat& direct, mat& indirect, mat& total) {
 
