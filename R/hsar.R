@@ -186,7 +186,8 @@ hsar <- function(formula, data = NULL, W=NULL, M=NULL, Delta, Durbin = FALSE,
       lambda <- 0.5
       sigma2e <- 2.0
       sigma2u <- 2.0
-      betas <- stats::coef(stats::lm(formula,data))
+      # betas <- stats::coef(stats::lm(formula,data)) # 2025-07-03: omits betas for lag X vars if Durbin = TRUE -GA
+      betas <- lm.fit(X, y)$coefficients # 2025-07-03: I thought I tried this before, though -GA
     }
 
     ## Call various models

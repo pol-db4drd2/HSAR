@@ -8,8 +8,8 @@ mcmc_impacts <- function(object) {
   betas <- betas[, setdiff(colnames(betas), "(Intercept)")]
 
   if(object$Durbin) {
-    thetas <- betas[,  grepl("^lag_", colnames(betas))]
-    betas  <- betas[, !grepl("^lag_", colnames(betas))]
+    thetas <- betas[,  grepl("^lag_", colnames(betas)), drop = FALSE]
+    betas  <- betas[, !grepl("^lag_", colnames(betas)), drop = FALSE]
 
     result <- impact_Durbin_cpp_arma(betas, thetas, object$crho, object$W)
   } else {

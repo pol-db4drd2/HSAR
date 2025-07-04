@@ -121,6 +121,8 @@ List hsar_cpp_arma_lambda_0(arma::mat X, arma::vec y, arma::sp_mat W,
   mat invT0 = inv(T0);
 
   mat T0M0 = invT0 * M0;
+
+  // throw std::logic_error("fixed");
   mat tX = trans(X);
   mat Zfull(Z);
   mat tZ = trans(Zfull);
