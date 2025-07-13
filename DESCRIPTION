@@ -1,6 +1,6 @@
 Package: HSAR
 Title: Hierarchical Spatial Autoregressive Model
-Version: 0.7.1
+Version: 0.7.2
 Authors@R: 
     c(
       person(given = "Guanpeng", family = "Dong",
