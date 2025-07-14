@@ -14,8 +14,6 @@ mcmc_impacts <- function(object, p = 5) {
     thetas <- `colnames<-`(thetas, stringr::str_remove(colnames(thetas), "^lag_"))
   }
 
-  rhopo <- outer(as.numeric(object$crho), 0:p, `^`) / n
-
   # take first p powers of wates
   wates <- object$W
   n     <- nrow(wates)
@@ -28,6 +26,9 @@ mcmc_impacts <- function(object, p = 5) {
     mates <- c(mates, list(w8pow))
     i <- i + 1
   }
+
+  # first p powers of each sample of rho, divided by n
+  rhopo <- outer(as.numeric(object$crho), 0:p, `^`) / n
 
   diags <- lapply(mates, Matrix::diag)
   disum <- sapply(diags, sum)
