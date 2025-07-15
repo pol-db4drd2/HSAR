@@ -4,10 +4,12 @@
 \alias{mcmc_impacts}
 \title{Estimate impact per MCMC draw of coefficients}
 \usage{
-mcmc_impacts(object)
+mcmc_impacts(object, p = 5)
 }
 \arguments{
 \item{object}{an \code{mcmc_hsar} or \code{mcmc_hsar_lambda_0} or \code{mcmc_sar} object}
+
+\item{p}{\code{numeric}. Maximum weight matrix power. Default \code{5}.}
 }
 \value{
 a list of three matrices named \code{direct}, \code{indirect}, and \code{total} giving impact estimates for each MCMC draw

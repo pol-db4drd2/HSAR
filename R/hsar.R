@@ -179,7 +179,7 @@ hsar <- function(formula, data = NULL, W=NULL, M=NULL, Delta, Durbin = FALSE,
         betas <- parameters.start$betas
         if (dim(X)[2]!= length(betas) ) stop("Starting values for Betas have got wrong dimension", call. = FALSE)
       }
-      else betas <- stats::coef(stats::lm(formula,data))
+      else betas <- stats::coef(stats::lm.fit(X, y)) # 2025-07-15: fixed this long ago in `sar.R` but not here -GA
     }
     else{
       rho <- 0.5
@@ -187,7 +187,7 @@ hsar <- function(formula, data = NULL, W=NULL, M=NULL, Delta, Durbin = FALSE,
       sigma2e <- 2.0
       sigma2u <- 2.0
       # betas <- stats::coef(stats::lm(formula,data)) # 2025-07-03: omits betas for lag X vars if Durbin = TRUE -GA
-      betas <- lm.fit(X, y)$coefficients # 2025-07-03: I thought I tried this before, though -GA
+      betas <- stats::lm.fit(X, y)$coefficients # 2025-07-03: I thought I tried this before, though -GA # 2025-07-15: see above -GA
     }
 
     ## Call various models

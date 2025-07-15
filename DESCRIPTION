@@ -38,6 +38,7 @@ Suggests:
     rmarkdown,
     sdsfun,
     sf,
+    stringr,
     tidyverse
 LinkingTo: 
     Rcpp,
